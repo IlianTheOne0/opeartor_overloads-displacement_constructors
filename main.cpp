@@ -1,14 +1,15 @@
-#include <iostream>
-#include <conio.h>
-
-using std::cout;
-using std::endl;
-using std::cin;
+#include "cfg.h"
+#include "lib.h"
+#include "Core/core.h"
+#include "Presentation/presentation.h"
 
 int main()
 {
+	INFO("The program is started");
 
+	View::Intro();
 
-	char ch = _getch();
+	INFO("The program is closed");
+
 	return 0;
 }
