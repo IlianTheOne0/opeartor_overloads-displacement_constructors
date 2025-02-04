@@ -8,6 +8,7 @@ using std::cin;
 int main()
 {
 
+
 	char ch = _getch();
 	return 0;
 }
