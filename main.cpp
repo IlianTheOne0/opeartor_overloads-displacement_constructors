@@ -1,12 +1,10 @@
-#include <iostream>
 #include <conio.h>
 
-using std::cout;
-using std::endl;
-using std::cin;
+#include "presentation.h"
 
 int main()
-{
+{	
+	View::Intro();
 
 	char ch = _getch();
 	return 0;
