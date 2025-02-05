@@ -139,6 +139,9 @@
     <ClInclude Include="Domain\Entities\Flat\abstraction.h" />
     <ClInclude Include="Domain\Entities\Flat\flat.h" />
     <ClInclude Include="Domain\Entities\Flat\interface.h" />
+    <ClInclude Include="Domain\Entities\House\abstraction.h" />
+    <ClInclude Include="Domain\Entities\House\house.h" />
+    <ClInclude Include="Domain\Entities\House\interface.h" />
     <ClInclude Include="Domain\Entities\Person\abstraction.h" />
     <ClInclude Include="Domain\Entities\Person\interface.h" />
     <ClInclude Include="Domain\Entities\Person\person.h" />
