@@ -7,6 +7,7 @@ template<typename TReturn>
 class IFlat
 {
 	virtual size_t getCounter() const = 0;
+	virtual Person<TReturn>* getObject(const size_t& id) = 0;
 
 	virtual TReturn getList() const = 0;
 	virtual bool addPerson(APerson<TReturn>& person) = 0;

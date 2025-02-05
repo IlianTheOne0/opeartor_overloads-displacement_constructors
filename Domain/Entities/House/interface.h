@@ -11,6 +11,5 @@ class IHouse
 
 	virtual bool addFlat(AFlat& flat) = 0;
 	virtual bool deleteFlet(const size_t& id) const = 0;
-};
 
 #endif

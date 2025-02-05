@@ -37,6 +37,18 @@ void View::Intro1()
 	cout << flat1->getList() << endl;
 	cout << flat1->getCounter() << endl;
 
+	cout << flat1->getObject(0)->getName() << endl;
+	cout << flat1->getObject(1)->getName() << endl;
+	cout << flat1->getObject(2)->getName() << endl;
+	cout << flat1->getObject(3)->getName() << endl;
+
+	flat1->getObject(0)->setName("hello world 0");
+	flat1->getObject(1)->setName("hello world 1");
+	flat1->getObject(2)->setName("hello world 2");
+	flat1->getObject(3)->setName("hello world 3");
+
+	cout << flat1->getList() << endl;
+
 	delete flat1;
 }
 
