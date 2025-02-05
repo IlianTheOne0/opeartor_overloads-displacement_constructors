@@ -7,7 +7,7 @@ int main()
 {
 	INFO("The program is started");
 
-	View::Intro0();
+	View::Intro1();
 
 	INFO("The program is closed");
 
