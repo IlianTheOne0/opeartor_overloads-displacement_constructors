@@ -3,21 +3,22 @@
 
 #include "abstraction.h"
 
+template<typename TReturn>
 class Person
-	: public APerson<string>
+	: public APerson<TReturn>
 {
 public:
 	Person()
 		: APerson()
 	{ CREATE_INFO("Person <- Default constructor: called;"); }
-	Person(string name)
-		: APerson(name)
+	Person(TReturn name)
+		: APerson<TReturn>(name)
 	{ CREATE_INFO("Person <- Constructor: called;"); }
 	Person(Person&& other) noexcept
-		: APerson(move(other))
+		: APerson<TReturn>(move(other))
 	{ CREATE_INFO("Person <- Move constructor: called;"); }
-	Person(APerson&& other) noexcept
-		: APerson(move(other))
+	Person(APerson<TReturn>&& other) noexcept
+		: APerson<TReturn>(move(other))
 	{ CREATE_INFO("Person <- Move constructor: called;"); }
 
 	virtual ~Person() override
