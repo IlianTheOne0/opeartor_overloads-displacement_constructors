@@ -136,6 +136,9 @@
     <ClInclude Include="Core\core.h" />
     <ClInclude Include="Core\Logger\logger.h" />
     <ClInclude Include="Domain\domain.h" />
+    <ClInclude Include="Domain\Entities\Person\abstraction.h" />
+    <ClInclude Include="Domain\Entities\Person\interface.h" />
+    <ClInclude Include="Domain\Entities\Person\person.h" />
     <ClInclude Include="lib.h" />
     <ClInclude Include="Presentation\presentation.h" />
     <ClInclude Include="Presentation\View\view.h" />
