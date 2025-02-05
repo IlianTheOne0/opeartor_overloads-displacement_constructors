@@ -1,16 +1,15 @@
 #ifndef HOUSE_INTERFACE_H
 #define HOUSE_INTERFACE_H
 
-#include "../Person/person.h"
+#include "../Flat/flat.h"
 
 template<typename TReturn>
-class IFlat
+class IHouse
 {
 	virtual size_t getCounter() const = 0;
+	virtual Flat* getObject(const size_t& id) = 0;
 
-	virtual TReturn getList() const = 0;
-	virtual bool addPerson(APerson<TReturn>& person) = 0;
-	virtual bool deletePerson(const size_t& id) const = 0;
-};
+	virtual bool addFlat(AFlat& flat) = 0;
+	virtual bool deleteFlet(const size_t& id) const = 0;
 
 #endif
