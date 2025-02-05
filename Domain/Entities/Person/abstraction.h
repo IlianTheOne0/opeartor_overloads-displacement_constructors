@@ -18,6 +18,9 @@ public:
 	APerson(TValue name)
 		: _name(new TValue(name))
 	{ CREATE_INFO("APerson <- Constructor: called;"); }
+	APerson(APerson&& other) noexcept
+		: _name(other.getName())
+	{ CREATE_INFO("Person <- Move constructor: called;"); other.setName(nullptr); }
 
 	virtual ~APerson()
 	{ CREATE_INFO("APerson <- Destructor: called;"); if (_name != nullptr) { delete _name; _name = nullptr; } }

@@ -14,8 +14,11 @@ public:
 		: APerson(name)
 	{ CREATE_INFO("Person <- Constructor: called;"); }
 	Person(Person&& other) noexcept
-		: APerson(other.getName())
-	{ CREATE_INFO("Person <- Move constructor: called;"); other.setName(nullptr); }
+		: APerson(move(other))
+	{ CREATE_INFO("Person <- Move constructor: called;"); }
+	Person(APerson&& other) noexcept
+		: APerson(move(other))
+	{ CREATE_INFO("Person <- Move constructor: called;"); }
 
 	virtual ~Person() override
 	{ CREATE_INFO("Person <- Destructor: called;"); }
