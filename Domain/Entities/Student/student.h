@@ -69,6 +69,8 @@ class Student
     : public AStudent<string> {
 public:
     Student(APersonalInformation<string>* personalInformation, AStudentInformation<string>* studentInformation, AClassInformation<string>* classInformation);
+    Student(Student&& other) noexcept;
+    Student(AStudent&& other) noexcept;
     ~Student() override;
 
     string getStudentInformation() const override;

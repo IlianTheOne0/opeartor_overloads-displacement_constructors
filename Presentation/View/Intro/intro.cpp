@@ -102,7 +102,7 @@ void View::Intro2()
 
     cout << student->getStudentInformation() << endl;
 
-    AStudent<string>* student1 = move(student);
+    AStudent<string>* student1 = new Student(move(*student));
     cout << student1->getStudentInformation() << endl;
     counter++;
 

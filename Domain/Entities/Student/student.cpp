@@ -110,7 +110,16 @@ Student::Student(APersonalInformation<string>* personalInformation, AStudentInfo
     : AStudent(personalInformation, studentInformation, classInformation) {
     CREATE_INFO("Student <- Constructor: called;");
 }
-
+Student::Student(Student&& other) noexcept
+    : AStudent(move(other))
+{
+    CREATE_INFO("Student <- Move constructor: called;");
+}
+Student::Student(AStudent&& other) noexcept
+    : AStudent(move(other))
+{
+    CREATE_INFO("Student <- Move constructor: called;");
+}
 Student::~Student() {
     CREATE_INFO("Student <- Destructor: called;");
 }
