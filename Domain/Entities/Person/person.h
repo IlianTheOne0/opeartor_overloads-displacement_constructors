@@ -21,7 +21,7 @@ public:
 		: APerson<TReturn>(move(other))
 	{ CREATE_INFO("Person <- Move constructor: called;"); }
 
-	virtual ~Person() override
+	~Person() override
 	{ CREATE_INFO("Person <- Destructor: called;"); }
 };
 
