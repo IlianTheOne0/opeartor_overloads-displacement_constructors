@@ -3,15 +3,13 @@
 
 void View::Intro0()
 {
-	Person* person0 = new Person("Joe");
-	Person* person1 = move(person0);
-	Person* person2 = new Person("Joe");
+	APerson<string>* person0 = new Person<string>("Joe");
+	APerson<string>* person1 = new Person<string>(move(*person0)); delete person0;
+	
+	cout << person1->getName() << endl;
 
-	person1->setName("Jhon");
-
-	cout << person1->getName() << endl
-		<< person2->getName() << endl;
-
+	person1->setName("Hello world!");
+	cout << person1->getName() << endl;
+	
 	delete person1;
-	delete person2;
 }
