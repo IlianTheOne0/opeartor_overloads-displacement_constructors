@@ -25,7 +25,7 @@ public:
 
 	size_t getCounter() const override { CREATE_INFO("AFlat -> Method getCounter: called;"); if (_counter != nullptr) { return *_counter; } else { return DEFAULT_EMPTY_NUMBER; } }
 
-	Person<string>* getObject(const size_t& id) { INFO("AFlat -> Method getObject: called;"); if (id >= *_counter || id < 0) { ERROR("AFlat -> Method getObject: incorrect ID!;"); } return _peopleList[id]; }
+	Person<string>* getObject(const size_t& id) override { INFO("AFlat -> Method getObject: called;"); if (id >= *_counter || id < 0) { ERROR("AFlat -> Method getObject: incorrect ID!;"); } return _peopleList[id]; }
 
 	string getList() const override { INFO("AFlat -> Method getList: called;"); string result; for (size_t i = 0; i < *_counter; i++) { result += to_string(i + 1) + ". " + _peopleList[i]->getName() + "\n"; } return result; }
 	bool addPerson(APerson<string>& person) override
