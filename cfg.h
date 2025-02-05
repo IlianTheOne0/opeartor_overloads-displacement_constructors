@@ -2,6 +2,6 @@
 #define CFG_H
 
 #include "Core/Logger/logger.h"
-bool Logger::_isEnabled = true;
+bool Logger::_isEnabled = false;
 
 #endif

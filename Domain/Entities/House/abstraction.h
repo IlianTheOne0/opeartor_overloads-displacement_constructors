@@ -31,7 +31,7 @@ public:
 	{
 		INFO("AHouse -> Method addPerson: called;");
 
-		if (*_counter == _maxSize) { ERROR("AHouse -> Method addPerson: the list is full! return false;"); return false; }
+		if (*_counter == _maxSize) { ERROR("AHouse -> Method addFlat: the list is full! return false;"); return false; }
 		_flatList[*_counter] = new Flat(move(flat));
 		(*_counter)++;
 
@@ -41,7 +41,7 @@ public:
 	{
 		INFO("AHouse -> Method deletePerson: called;");
 
-		if (id >= *_counter || id < 0) { ERROR("AHouse -> Method deletePerson: incorrect ID! return false;"); return false; }
+		if (id >= *_counter || id < 0) { ERROR("AHouse -> Method deleteFlet: incorrect ID! return false;"); return false; }
 
 		delete _flatList[id];
 		for (size_t i = id; i < *_counter - 1; i++) { _flatList[i] = _flatList[i + 1]; }

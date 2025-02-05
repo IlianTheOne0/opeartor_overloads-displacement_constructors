@@ -54,37 +54,34 @@ void View::Intro1()
 
 void View::Intro2()
 {
+	AHouse* house = new House();
 	bool _return{};
-	auto return_ = [](const bool& value) { if (!value) { return "ERROR\n"; } return "PASSED\n"; };
+	auto return_ = [](const bool& value) -> string { if (!value) { return "ERROR\n"; } return "PASSED\n"; };
 
-	APerson<string>* person0 = new Person<string>("Joe");
-	APerson<string>* person1 = new Person<string>("Hoe");
-	APerson<string>* person2 = new Person<string>("Noe");
-	APerson<string>* person3 = new Person<string>("Moe");
+	string names[5] = { "Joe", "Hoe", "Noe", "Moe", "Koe" };
 
-	AFlat* flat0 = new Flat();
+	for (size_t i = 0; i < 15; i++)
+	{
+		AFlat* flat = new Flat();
+		
+		for (size_t j = 0; j < 4; j++)
+		{
+			APerson<string>* person = new Person<string>(names[j % 5]);
+			_return = flat->addPerson(*person); cout << i << "." << j << ". " << return_(_return); delete person;
+		}
 
-	_return = flat0->addPerson(*person0); delete person0;
-	_return = flat0->addPerson(*person1); delete person1;
-	_return = flat0->addPerson(*person2); delete person2;
-	_return = flat0->addPerson(*person3); delete person3;
-	AFlat* flat1 = new Flat(move(*flat0));
-	AFlat* flat2 = new Flat(move(*flat0));
-	AFlat* flat3 = new Flat(move(*flat0));
-	AFlat* flat4 = new Flat(move(*flat0));
+		_return = house->addFlat(*flat); cout << "Flat " << i << ". " << return_(_return); delete flat; cout << endl;
+	}
 
-	AHouse* house0 = new House();
-	_return = house0->addFlat(*flat0); cout << "0. " << return_(_return); delete flat0;
-	_return = house0->addFlat(*flat1); cout << "1. " << return_(_return); delete flat1;
-	_return = house0->addFlat(*flat2); cout << "2. " << return_(_return); delete flat2;
-	_return = house0->addFlat(*flat3); cout << "3. " << return_(_return); delete flat3;
-	_return = house0->addFlat(*flat4); cout << "4. " << return_(_return); delete flat4;
+	cout << endl << endl;
 
-	cout << house0->getCounter() << endl;
+	AHouse* house0 = new House(move(*house)); delete house;
 
-	cout << house0->getObject(0)->getList() << endl;
-	cout << house0->getObject(1)->getList() << endl;
-	cout << house0->getObject(2)->getList() << endl;
-	cout << house0->getObject(3)->getList() << endl;
-	cout << house0->getObject(4)->getList() << endl;
+	for (size_t i = 0; i < house0->getCounter(); ++i) { cout << "Flat " << i << " contains: " << endl << house0->getObject(i)->getList() << endl; }
+
+	house0->getObject(5)->getObject(3)->setName("Anton");
+	cout << house0->getObject(5)->getObject(3)->getName() << endl;
+	cout << "Flat 5 contains: " << endl << house0->getObject(5)->getList() << endl;
+
+	delete house0;
 }
