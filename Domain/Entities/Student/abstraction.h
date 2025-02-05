@@ -9,31 +9,45 @@ class APersonalInformation abstract
 	: public IPersonalInformation<TValue>
 {
 protected:
-	TValue _name;
-	TValue _surname;
-	unsigned short _age;
+	TValue* _name = nullptr;
+	TValue* _surname = nullptr;
+	unsigned short* _age = nullptr;
 public:
 	APersonalInformation()
-		: _name(DEFAULT_EMPTY_STRING), _surname(DEFAULT_EMPTY_STRING), _age(DEFAULT_EMPTY_NUMBER)
+		: _name(nullptr), _surname(nullptr), _age(nullptr)
 	{
 		CREATE_INFO("APersonalInformation <- Default constructor: called;");
 	}
 	APersonalInformation(TValue name, TValue surname, unsigned short age)
-		: _name(name), _surname(surname), _age(age)
+		: _name(new TValue(name)), _surname(new TValue(surname)), _age(new unsigned short(age))
 	{
 		CREATE_INFO("APersonalInformation <- Constructor: called;");
+	}
+
+	APersonalInformation(APersonalInformation&& other) noexcept
+		: _name(other._name), _surname(other._surname), _age(other._age)
+	{
+		CREATE_INFO("APersonalInformation <- Move constructor: called;");
+		other._name = nullptr;
+		other._surname = nullptr;
+		other._age = nullptr;
 	}
 
 	virtual ~APersonalInformation()
 	{
 		CREATE_INFO("APersonalInformation <- Destructor: called;");
+
+		if (_name != nullptr) { delete _name; _name = nullptr; }
+		if (_surname != nullptr) { delete _surname; _surname = nullptr; }
+		if (_age != nullptr) { delete _age; _age = nullptr; }
 	}
 
 	virtual TValue getName() const = 0;
 	virtual TValue getSurname() const = 0;
 	virtual unsigned short getAge() const = 0;
-	virtual void setName(const TValue& value) = 0;
-	virtual void setSurname(const TValue& value) = 0;
+
+	virtual void setName(const string& value) = 0;
+	virtual void setSurname(const string& value) = 0;
 	virtual void setAge(const unsigned short& value) = 0;
 };
 
@@ -42,31 +56,48 @@ class AStudentInformation abstract
 	: public IStudentInformation<TValue>
 {
 protected:
-	size_t _studentID;
-	TValue _email;
-	TValue _phoneNumber;
-	TValue _address;
+	size_t* _studentID = nullptr;
+	TValue* _email = nullptr;
+	TValue* _phoneNumber = nullptr;
+	TValue* _address = nullptr;
 public:
 	AStudentInformation()
-		: _studentID(DEFAULT_EMPTY_NUMBER), _email(DEFAULT_EMPTY_STRING), _phoneNumber(DEFAULT_EMPTY_STRING), _address(DEFAULT_EMPTY_STRING)
+		: _studentID(nullptr), _email(nullptr), _phoneNumber(nullptr), _address(nullptr)
 	{
 		CREATE_INFO("AStudentInformation <- Default constructor: called;");
 	}
 	AStudentInformation(size_t studentID, TValue email, TValue phoneNumber, TValue address)
-		: _studentID(studentID), _email(email), _phoneNumber(phoneNumber), _address(address)
+		: _studentID(new size_t(studentID)), _email(new TValue(email)), _phoneNumber(new TValue(phoneNumber)), _address(new TValue(address))
 	{
 		CREATE_INFO("AStudentInformation <- Constructor: called;");
+	}
+
+	AStudentInformation(AStudentInformation&& other) noexcept
+		: _studentID(other._studentID), _email(other._email), _phoneNumber(other._phoneNumber), _address(other._address)
+	{
+		CREATE_INFO("AStudentInformation <- Move constructor: called;");
+
+		other._studentID = nullptr;
+		other._email = nullptr;
+		other._phoneNumber = nullptr;
+		other._address = nullptr;
 	}
 
 	virtual ~AStudentInformation()
 	{
 		CREATE_INFO("AStudentInformation <- Destructor: called;");
+
+		if (_studentID != nullptr) { delete _studentID; _studentID = nullptr; }
+		if (_email != nullptr) { delete _email; _email = nullptr; }
+		if (_phoneNumber != nullptr) { delete _phoneNumber; _phoneNumber = nullptr; }
+		if (_address != nullptr) { delete _address; _address = nullptr; }
 	}
 
 	virtual size_t getStudentID() const = 0;
 	virtual TValue getEmail() const = 0;
 	virtual TValue getPhoneNumber() const = 0;
 	virtual TValue getAddress() const = 0;
+
 	virtual void setStudentID(const size_t& value) = 0;
 	virtual void setEmail(const TValue& value) = 0;
 	virtual void setPhoneNumber(const TValue& value) = 0;
@@ -78,25 +109,39 @@ class AClassInformation abstract
 	: public IClassInformation<TValue>
 {
 protected:
-	TValue _className;
-	TValue _specialization;
-	float _gpa;
+	TValue* _className = nullptr;
+	TValue* _specialization = nullptr;
+	float* _gpa = nullptr;
 public:
 	AClassInformation()
-		: _className(DEFAULT_EMPTY_STRING), _specialization(DEFAULT_EMPTY_STRING), _gpa(DEFAULT_EMPTY_FLOAT)
+		: _className(nullptr), _specialization(nullptr), _gpa(nullptr)
 	{
 		CREATE_INFO("AClassInformation <- Default constructor: called;");
 	}
 
 	AClassInformation(TValue className, TValue specialization, float gpa)
-		: _className(className), _specialization(specialization), _gpa(gpa)
+		: _className(new TValue(className)), _specialization(new TValue(specialization)), _gpa(new float(gpa))
 	{
 		CREATE_INFO("AClassInformation <- Constructor: called;");
+	}
+
+	AClassInformation(AClassInformation&& other) noexcept
+		: _className(other._className), _specialization(other._specialization), _gpa(other._gpa)
+	{
+		CREATE_INFO("AClassInformation <- Move constructor: called;");
+
+		other._className = nullptr;
+		other._specialization = nullptr;
+		other._gpa = nullptr;
 	}
 
 	virtual ~AClassInformation()
 	{
 		CREATE_INFO("AClassInformation <- Destructor: called;");
+
+		if (_className != nullptr) { delete _className; _className = nullptr; }
+		if (_specialization != nullptr) { delete _specialization; _specialization = nullptr; }
+		if (_gpa != nullptr) { delete _gpa; _gpa = nullptr; }
 	}
 
 	virtual TValue getClassName() const = 0;
@@ -118,15 +163,31 @@ public:
 
 	AStudent() = delete;
 
-	AStudent(APersonalInformation<TValue>& personalInformation, AStudentInformation<TValue>& studentInformation, AClassInformation<TValue>& classInformation)
-		: personalInformation(&personalInformation), studentInformation(&studentInformation), classInformation(&classInformation)
+	AStudent(APersonalInformation<TValue>* personalInformation, AStudentInformation<TValue>* studentInformation, AClassInformation<TValue>* classInformation)
+		: personalInformation(personalInformation), studentInformation(studentInformation), classInformation(classInformation)
 	{
 		CREATE_INFO("AStudent <- Constructor: called;");
+	}
+
+	AStudent(AStudent&& other) noexcept
+		: personalInformation(other.personalInformation),
+		studentInformation(other.studentInformation),
+		classInformation(other.classInformation)
+	{
+		CREATE_INFO("AStudent <- Move constructor: called;");
+
+		other.personalInformation = nullptr;
+		other.studentInformation = nullptr;
+		other.classInformation = nullptr;
 	}
 
 	virtual ~AStudent()
 	{
 		CREATE_INFO("AStudent <- Destructor: called;");
+
+		if (personalInformation != nullptr) { delete personalInformation; personalInformation = nullptr; }
+		if (studentInformation != nullptr) { delete studentInformation; studentInformation = nullptr; }
+		if (classInformation != nullptr) { delete classInformation; classInformation = nullptr; }
 	}
 };
 

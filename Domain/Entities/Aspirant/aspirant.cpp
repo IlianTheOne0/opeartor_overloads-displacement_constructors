@@ -1,6 +1,6 @@
 #include "aspirant.h"
 
-Aspirant::Aspirant(APersonalInformation<string>& personalInformation, AStudentInformation<string>& studentInformation, AClassInformation<string>& classInformation)
+Aspirant::Aspirant(APersonalInformation<string>* personalInformation, AStudentInformation<string>* studentInformation, AClassInformation<string>* classInformation)
     : Student(personalInformation, studentInformation, classInformation)
 {
     CREATE_INFO("Aspirant <- Constructor: called;");
